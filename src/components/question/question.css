@@ -1,0 +1,28 @@
+.question{
+    display: flex;
+    
+}
+
+.bird-img {
+    width: 200px;
+    height: 155px;
+    border-radius: 10px;
+    margin: 0;
+}
+
+
+
+.question ul{
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.question ul li{
+    display: block;
+   background-color: #303030;
+}
+
+.question ul li.list-group-item{
+    border-bottom: 1px solid;
+}
