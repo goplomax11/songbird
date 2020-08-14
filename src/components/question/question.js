@@ -1,7 +1,35 @@
 import React from 'react';
 import './question.css';
+import ServiceWorker from '../../any/service-worker';
 
-const Question = () => {
+
+ class Question extends React.Component {
+     
+    serviceWorker = new ServiceWorker();
+
+    state = {
+        audio: ''
+      }
+
+   componentDidMount() {
+    this.setQuestion();
+   }
+
+
+    setQuestion () {
+     const sound = this.serviceWorker
+        .getRandomQuestion(0)
+        this.setState({
+            audio: sound
+        })
+        
+    }
+    
+    
+    
+    render(){
+        const {audio} = this.state
+     
     return (
         <div className="question jumbotron rounded">
 
@@ -13,7 +41,7 @@ const Question = () => {
                     </li>
                     <li className='list-group-item'>
                         <audio controls="controls">
-                            <source src="https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC501461-190616_08.13h_koekoek_brabantse%20biesbosch%20jantjesplaat_roep_1%20ex_ad%20m_ter%20plaatse%20zingend_gezien_.mp3" type="audio/mpeg" />
+                            <source src={audio} type="audio/mpeg" />
                                  Your browser does not support the audio element.
                          </audio>
                     </li>
@@ -24,6 +52,7 @@ const Question = () => {
            
         </div>
     )
+ }
 }
 
 export default Question;

@@ -1,4 +1,0 @@
-<Header />
-      <Question />
-      <AnswerChoice/>
-      <Description />

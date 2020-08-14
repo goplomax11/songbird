@@ -4,7 +4,7 @@ import Header from '../header';
 import Question from '../question';
 import AnswerChoice from '../answer-choice';
 import Description from '../description';
-
+import ButtonLvl from '../buttonlvl';
 
 
 
@@ -28,7 +28,7 @@ export default class App extends React.Component {
           <Description />
           </div>
         </div>
-        <button className='btn'>Next Level</button>
+        <ButtonLvl />
     </div>
   )
 }
