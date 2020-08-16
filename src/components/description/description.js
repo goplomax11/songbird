@@ -4,14 +4,16 @@ import DescriptionBird from '../description-bird';
 
  class Description extends React.Component{
 
-    state = {
-        waiting: false
-    }
 
     render() {
-        const {waiting} =this.state;
+        const {waiting,name,species,description,audioTry,image} =this.props;
 
-        const content = waiting ? <Def/> : <DescriptionBird />
+        const content = waiting ? <Def/> : <DescriptionBird
+                                            name={name}
+                                            species={species}
+                                            description={description}
+                                            audioTry ={audioTry}
+                                            image={image} />
     
         return (
         

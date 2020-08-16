@@ -29,11 +29,12 @@ class AnswerChoice extends React.Component {
 
     render() { 
         const {birds} = this.state;
+        const {changeWait} = this.props;
     return (
         <div className='bird-details'>
             <ul className="item-list list-group">
             {birds.map((bird) =>(
-                 <li className='list-group-item'>
+                 <li className='list-group-item' onClick={changeWait}>
                      <span className='li-btn'>{bird}</span>
                 </li>
             ))}

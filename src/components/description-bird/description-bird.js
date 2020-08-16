@@ -1,43 +1,13 @@
 import React from 'react';
-import ServiceWorker from '../../any/service-worker';
+
 import './description-bird.css';
 
 class DescriptionBird extends React.Component {
 
-    state ={
-        name: '',
-        species: '',
-        description:'',
-        audio:'',
-        image:'',
-    }
-
-
-
-    serviceWorker = new ServiceWorker();
-
-    componentDidMount = () =>{
-        this.descriptionUpdate();
-    }
-
-
-    descriptionUpdate() {
-      const {name,species,description,audio,image} 
-      = this.serviceWorker
-             .getDescriptions(0,3)
-    
-        this.setState({
-        name,
-        species,
-        description,
-        audio,
-        image
-        })
-    }
 
 
     render() {
-        const {name,species,description,audio,image} = this.state;
+        const {name,species,description,audioTry,image} = this.props;
         
         return (
             <div className = "card bird-description">
@@ -48,7 +18,7 @@ class DescriptionBird extends React.Component {
                         <li>{species}</li>
                         <li>
                             <audio controls="controls">
-                            <source src={audio} type="audio/mpeg" />
+                            <source src={audioTry} type="audio/mpeg" />
                                  Your browser does not support the audio element.
                          </audio>
                          </li>

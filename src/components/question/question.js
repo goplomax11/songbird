@@ -5,32 +5,12 @@ import ServiceWorker from '../../any/service-worker';
 
  class Question extends React.Component {
      
-    serviceWorker = new ServiceWorker();
 
-    state = {
-        audio: '',
-        rand: ''
-      }
-
-   componentDidMount() {
-    this.setQuestion();
-   }
-
-
-    setQuestion () {
-     const {audio,rand} = this.serviceWorker
-        .getRandomQuestion(0)
-        this.setState({
-            audio,
-            rand
-        })
-        
-    }
     
     
     
     render(){
-        const {audio,rand} = this.state
+        const {audio,rand} = this.props
      
     return (
         <div className="question jumbotron rounded">
