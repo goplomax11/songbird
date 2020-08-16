@@ -4,16 +4,16 @@ import './buttonlvl.css'
  export default class ButtonLvl extends React.Component {
 
     state = {
-        count: 0,
+        
         closed: true
     }
 
     render(){
 
-    
+    const {nextRound} = this.props
     return (
         
-            <button className='btn' disabled>Next Level</button>
+            <button className='btn' onClick ={nextRound}>Next Level</button>
       
     )
     }

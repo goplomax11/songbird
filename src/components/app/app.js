@@ -16,6 +16,7 @@ serviceWorker = new ServiceWorker();
 
 
 state ={
+  idOnClick: '',
   name: '',
   species: '',
   description:'',
@@ -23,14 +24,27 @@ state ={
   image:'',
   rand: '',
   audioTry: '',
-  waiting: true
-}
+  waiting: true,
+  round: 1,
+  birds: []
+  }
 
 componentDidMount() {
   this.setQuestion();
   this.descriptionUpdate();
+  this.updateBirds(this.state.round);
 }
 
+
+
+updateBirds (round) {
+  const names = this.serviceWorker
+     .getNames(round)
+     this.setState({
+         birds: names
+     })
+     
+ }
 
 setQuestion () {
  const {audio,rand} = this.serviceWorker
@@ -65,7 +79,7 @@ changeWait = () =>{
 
 
  render() {
-   const {audio, rand,name,species,description,audioTry,image,waiting} = this.state
+   const {audio, rand,name,species,description,audioTry,image,waiting,round,birds} = this.state
   return (
     <div>
         <Header/>
@@ -73,9 +87,9 @@ changeWait = () =>{
 
         <div className='row mb2'>
           <div className="col-md-6">
-            <AnswerChoice changeWait ={() =>this.setState({
-                                            waiting:false
-           })} />
+            <AnswerChoice 
+            birds={birds}
+            changeWait ={() =>this.setState({waiting:false})} />
           </div>
           <div className="col-md-6">
           <Description 
@@ -88,7 +102,9 @@ changeWait = () =>{
            />
           </div>
         </div>
-        <ButtonLvl />
+        <ButtonLvl
+        nextRound ={() =>this.setState({round: round + 1})}
+        />
     </div>
   )
 }
