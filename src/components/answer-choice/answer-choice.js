@@ -30,7 +30,7 @@ class AnswerChoice extends React.Component {
     render() { 
         const {birds} = this.state;
     return (
-        <div>
+        <div className='bird-details'>
             <ul className="item-list list-group">
             {birds.map((bird) =>(
                  <li className='list-group-item'>

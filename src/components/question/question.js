@@ -8,7 +8,8 @@ import ServiceWorker from '../../any/service-worker';
     serviceWorker = new ServiceWorker();
 
     state = {
-        audio: ''
+        audio: '',
+        rand: ''
       }
 
    componentDidMount() {
@@ -17,10 +18,11 @@ import ServiceWorker from '../../any/service-worker';
 
 
     setQuestion () {
-     const sound = this.serviceWorker
+     const {audio,rand} = this.serviceWorker
         .getRandomQuestion(0)
         this.setState({
-            audio: sound
+            audio,
+            rand
         })
         
     }
@@ -28,7 +30,7 @@ import ServiceWorker from '../../any/service-worker';
     
     
     render(){
-        const {audio} = this.state
+        const {audio,rand} = this.state
      
     return (
         <div className="question jumbotron rounded">

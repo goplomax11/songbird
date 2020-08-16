@@ -13,6 +13,24 @@ export default class ServiceWorker extends React.Component {
     getRandomQuestion = (round) =>{
       const rand =  Math.floor(Math.random()*6);
       const {audio} = birdsData[round][rand];
-      return audio;
+      return {
+          audio,
+          rand
+      }
     }
+
+    getDescriptions = (round, id) =>{
+
+        const {name, species, description,audio, image} = birdsData[round][id-1];
+        return {
+            name,
+            species,
+            audio,
+            description,
+            image
+
+        }
+    }
+
+
 }
