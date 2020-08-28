@@ -2,18 +2,35 @@ import React from 'react';
 import './description.css';
 import DescriptionBird from '../description-bird';
 
+
  class Description extends React.Component{
 
+    state= {
+        idOnClick: ''
+    }
 
+    componentDidMount () {
+        this.updateClick()
+    }
+
+
+    updateClick = () =>{
+        const {idOnClick} =this.props
+        this.setState({
+            idOnClick
+        })
+        console.log('das')
+    }
     render() {
-        const {waiting,name,species,description,audioTry,image} =this.props;
+      
+        const {waiting,round,idOnClick} = this.props;
 
-        const content = waiting ? <Def/> : <DescriptionBird
-                                            name={name}
-                                            species={species}
-                                            description={description}
-                                            audioTry ={audioTry}
-                                            image={image} />
+
+
+        const content = waiting ?
+         <Def/> : <DescriptionBird
+                    round={round}
+                    idOnClick={idOnClick} />
     
         return (
         
@@ -29,10 +46,12 @@ export default Description;
 
 const Def = () =>{
     return (
-    <p className='instruction'>
-        <p>Послушайте плеер.</p>
-        <span>Выберите птицу из списка</span>
-    </p>
+      <div> 
+        <p className='instruction'>
+            <p>Послушайте плеер.</p>
+            <span>Выберите птицу из списка</span>
+        </p>
+    </div> 
     )
 }
 

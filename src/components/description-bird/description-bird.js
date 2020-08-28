@@ -1,13 +1,49 @@
 import React from 'react';
-
+import ServiceWorker from '../../any/service-worker';
 import './description-bird.css';
 
 class DescriptionBird extends React.Component {
 
+    serviceWorker = new ServiceWorker();
 
+    state = {
+        idOnClick: ''
+    }
+
+    componentDidMount () {
+        this.updateClick()
+    }
+
+    componentDidUpdate () {}
+
+    updateClick = () =>{
+        const {idOnClick} =this.props
+        this.setState({
+            idOnClick
+        })
+    }
+
+
+    descriptionUpdate = () => {
+  
+        const {round,idOnClick} = this.props
+        const {name,species,description,audio,image} 
+        = this.serviceWorker
+            .getDescriptions(round,idOnClick)
+
+        return {
+        name,
+        species,
+        description,
+        image,
+        audioTry:audio,
+        
+        
+    }
+}
 
     render() {
-        const {name,species,description,audioTry,image} = this.props;
+        const {name,species,description,audioTry,image} = this.descriptionUpdate
         
         return (
             <div className = "card bird-description">

@@ -3,12 +3,7 @@ import './buttonlvl.css'
 
  export default class ButtonLvl extends React.Component {
 
-    state = {
-        
-        closed: true
-    }
-
-    render(){
+     render(){
 
     const {nextRound} = this.props
     return (

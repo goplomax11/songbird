@@ -7,5 +7,6 @@
 .list-group-item {
     cursor: pointer;
     color: #fff!important;
+    flex-grow: 1;
     
 }

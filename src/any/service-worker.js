@@ -21,7 +21,7 @@ export default class ServiceWorker extends React.Component {
 
     getDescriptions = (round, id) =>{
 
-        const {name, species, description,audio, image} = birdsData[round][id-1];
+        const {name, species, description,audio, image} = birdsData[round][id];
         return {
             name,
             species,

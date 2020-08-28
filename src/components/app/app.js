@@ -17,34 +17,19 @@ serviceWorker = new ServiceWorker();
 
 state ={
   idOnClick: '',
-  name: '',
-  species: '',
-  description:'',
-  audio:'',
-  image:'',
-  rand: '',
-  audioTry: '',
   waiting: true,
-  round: 1,
-  birds: []
+  rand: '',
+  audio:'',
+  round: 0,
   }
 
 componentDidMount() {
   this.setQuestion();
-  this.descriptionUpdate();
-  this.updateBirds(this.state.round);
+ 
 }
 
 
 
-updateBirds (round) {
-  const names = this.serviceWorker
-     .getNames(round)
-     this.setState({
-         birds: names
-     })
-     
- }
 
 setQuestion () {
  const {audio,rand} = this.serviceWorker
@@ -57,53 +42,45 @@ setQuestion () {
 }
 
 
-descriptionUpdate() {
-const {name,species,description,audio,image} 
-= this.serviceWorker
-       .getDescriptions(0,1)
 
+changeWait = (index) =>{
   this.setState({
-  name,
-  species,
-  description,
-  audioTry:audio,
-  image
+    waiting:false,
+    idOnClick: index
+
   })
 }
 
-changeWait = () =>{
-  this.setState({
-    waiting:false
-  })
+nextRound =() =>{
+  this.setState({round: this.state.round + 1}); 
+ 
 }
 
 
  render() {
-   const {audio, rand,name,species,description,audioTry,image,waiting,round,birds} = this.state
+   const {audio, rand,idOnClick,waiting,round} = this.state
   return (
     <div>
-        <Header/>
+        <Header
+        round={round}/>
         <Question audio = {audio} rand={rand}/>
 
         <div className='row mb2'>
           <div className="col-md-6">
             <AnswerChoice 
-            birds={birds}
-            changeWait ={() =>this.setState({waiting:false})} />
+            round={round}
+            changeWait ={(index) =>this.changeWait(index)} />
           </div>
           <div className="col-md-6">
           <Description 
-          name={name}
-          species={species}
-          description={description}
-          audioTry ={audioTry}
-          image={image}
+          round={round}
+          idOnClick={idOnClick}
           waiting={waiting}
            />
           </div>
         </div>
         <ButtonLvl
-        nextRound ={() =>this.setState({round: round + 1})}
+        nextRound ={this.nextRound}
         />
     </div>
   )
