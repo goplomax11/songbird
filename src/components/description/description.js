@@ -5,22 +5,8 @@ import DescriptionBird from '../description-bird';
 
  class Description extends React.Component{
 
-    state= {
-        idOnClick: ''
-    }
-
-    componentDidMount () {
-        this.updateClick()
-    }
 
 
-    updateClick = () =>{
-        const {idOnClick} =this.props
-        this.setState({
-            idOnClick
-        })
-        console.log('das')
-    }
     render() {
       
         const {waiting,round,idOnClick} = this.props;

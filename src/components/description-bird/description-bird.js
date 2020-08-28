@@ -1,27 +1,11 @@
 import React from 'react';
 import ServiceWorker from '../../any/service-worker';
 import './description-bird.css';
+import AudioPlayer from '../audio-player/audio-player'
 
 class DescriptionBird extends React.Component {
 
     serviceWorker = new ServiceWorker();
-
-    state = {
-        idOnClick: ''
-    }
-
-    componentDidMount () {
-        this.updateClick()
-    }
-
-    componentDidUpdate () {}
-
-    updateClick = () =>{
-        const {idOnClick} =this.props
-        this.setState({
-            idOnClick
-        })
-    }
 
 
     descriptionUpdate = () => {
@@ -36,14 +20,13 @@ class DescriptionBird extends React.Component {
         species,
         description,
         image,
-        audioTry:audio,
-        
-        
+        audio
+              
     }
 }
 
     render() {
-        const {name,species,description,audioTry,image} = this.descriptionUpdate
+        const {name,species,description,audio,image} = this.descriptionUpdate()
         
         return (
             <div className = "card bird-description">
@@ -53,15 +36,14 @@ class DescriptionBird extends React.Component {
                         <li><h4>{name}</h4></li>
                         <li>{species}</li>
                         <li>
-                            <audio controls="controls">
-                            <source src={audioTry} type="audio/mpeg" />
-                                 Your browser does not support the audio element.
-                         </audio>
-                         </li>
+                            <AudioPlayer 
+                            audio={audio}/>
+                        </li>
                     </ul>
                 </div>
-            <span className='bird-description'>{description}</span>
-                
+                <span className='bird-description'>
+                    {description}
+                </span>
             </div>
         )
     }

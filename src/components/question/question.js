@@ -1,6 +1,6 @@
 import React from 'react';
 import './question.css';
-import ServiceWorker from '../../any/service-worker';
+import AudioPlayer from '../audio-player/audio-player'
 
 
  class Question extends React.Component {
@@ -10,7 +10,7 @@ import ServiceWorker from '../../any/service-worker';
     
     
     render(){
-        const {audio,rand} = this.props
+        const {audio} = this.props
      
     return (
         <div className="question jumbotron rounded">
@@ -22,10 +22,7 @@ import ServiceWorker from '../../any/service-worker';
                         <h3>*******</h3>
                     </li>
                     <li className='list-group-item'>
-                        <audio controls="controls">
-                            <source src={audio} type="audio/mpeg" />
-                                 Your browser does not support the audio element.
-                         </audio>
+                        <AudioPlayer audio={audio} />
                     </li>
                 </ul>
             </div>

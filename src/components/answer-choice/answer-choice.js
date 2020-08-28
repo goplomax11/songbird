@@ -32,7 +32,11 @@ class AnswerChoice extends React.Component {
             <ul className="item-list list-group d-flex">
             {birds.map((bird,index) =>(
                  <li className='list-group-item' key={index} onClick={() =>this.onClickChoose(index)}>
-                     <span className='li-btn'>{bird}</span>
+                     <span className='li-btn'>
+                         <a className='checking'>⚫</a>
+                         {bird}
+                         
+                         </span>
                 </li>
             ))}
                 

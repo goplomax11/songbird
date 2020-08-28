@@ -10,3 +10,9 @@
     flex-grow: 1;
     
 }
+
+.checking{
+    padding: 10px;
+    width: 5px;
+    height: 5px;
+}

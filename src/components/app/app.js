@@ -32,12 +32,15 @@ componentDidMount() {
 
 
 setQuestion () {
- const {audio,rand} = this.serviceWorker
-    .getRandomQuestion(0)
+  const {round} = this.state;
+  const {audio,rand} = this.serviceWorker
+    .getRandomQuestion(round)
     this.setState({
         audio,
         rand
     })
+  console.log(`rand:${rand}`)
+  console.log(`round${this.state.round}`)
     
 }
 
@@ -52,8 +55,13 @@ changeWait = (index) =>{
 }
 
 nextRound =() =>{
-  this.setState({round: this.state.round + 1}); 
- 
+  this.setState((state) => {
+    return {
+      round: state.round + 1,
+      idOnClick: '',
+      waiting:true
+  }},this.setQuestion())
+  //Первый и второй раунд одинаковы 
 }
 
 
@@ -63,13 +71,14 @@ nextRound =() =>{
     <div>
         <Header
         round={round}/>
-        <Question audio = {audio} rand={rand}/>
+        <Question audio = {audio}/>
 
         <div className='row mb2'>
           <div className="col-md-6">
             <AnswerChoice 
             round={round}
-            changeWait ={(index) =>this.changeWait(index)} />
+            changeWait ={(index) =>this.changeWait(index)}
+            rand={rand} />
           </div>
           <div className="col-md-6">
           <Description 
