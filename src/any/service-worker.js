@@ -4,13 +4,13 @@ import React from 'react';
 export default class ServiceWorker extends React.Component {
 
 
-    getNames = (round) =>{
+    getNames = (round = 0) =>{
         const res = [];
      birdsData[round].map(({name}) =>res.push(name))
      return res;
     }
 
-    getRandomQuestion = (round) =>{
+    getRandomQuestion = (round = 0) =>{
       const rand =  Math.floor(Math.random()*6);
       const {audio} = birdsData[round][rand];
       return {

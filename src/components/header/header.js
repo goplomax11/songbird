@@ -12,7 +12,7 @@ class Header extends React.Component{
     render(){
 
     const typesBirds = this.state;
-    const {round} = this.props;
+    const {round,score} = this.props;
 
     const onType = typesBirds.map((bird,index) =>{
         const clazz = (round === index) ? 'active' : null
@@ -29,7 +29,7 @@ class Header extends React.Component{
                         <h5>
                             Score: 
                             <span className="score">
-                                0
+                                {score}
                             </span>
                         </h5>
                     </div>

@@ -21,26 +21,46 @@ state ={
   rand: '',
   audio:'',
   round: 0,
-  }
+  start:false,
+  clicked:[false,false,false,false,false,false],
+  correct:[false,false,false,false,false,false],
+  startScore:5,
+  score:0,
 
-componentDidMount() {
-  this.setQuestion();
- 
+}
+
+componentDidMount =() =>{
+   this.setQuestion(() =>console.log(`rand:${this.state.rand}`))
+   this.changeStart()
+   
 }
 
 
+setScoreForRound = (numberOfTry) =>{
+  this.setState({
+    score: this.state.score + this.state.startScore - numberOfTry
+  })
+}
 
 
-setQuestion () {
+changeStart = () =>{
+  this.setState({
+    start:true
+  })
+}
+
+
+setQuestion =() => {
   const {round} = this.state;
+  const newRound = this.state.start ? round + 1 : round
   const {audio,rand} = this.serviceWorker
-    .getRandomQuestion(round)
-    this.setState({
+    .getRandomQuestion(newRound)
+    this.setState((state) =>{
+      return{
         audio,
-        rand
-    })
-  console.log(`rand:${rand}`)
-  console.log(`round${this.state.round}`)
+        rand,
+    }})
+
     
 }
 
@@ -50,8 +70,8 @@ changeWait = (index) =>{
   this.setState({
     waiting:false,
     idOnClick: index
-
   })
+  
 }
 
 nextRound =() =>{
@@ -60,16 +80,18 @@ nextRound =() =>{
       round: state.round + 1,
       idOnClick: '',
       waiting:true
-  }},this.setQuestion())
-  //Первый и второй раунд одинаковы 
+  }})
+
+  this.setQuestion();
 }
 
 
  render() {
-   const {audio, rand,idOnClick,waiting,round} = this.state
+   const {audio, rand,idOnClick,waiting,round,score} = this.state
   return (
     <div>
         <Header
+        score={score}
         round={round}/>
         <Question audio = {audio}/>
 
@@ -78,7 +100,8 @@ nextRound =() =>{
             <AnswerChoice 
             round={round}
             changeWait ={(index) =>this.changeWait(index)}
-            rand={rand} />
+            rand={rand}
+            setScoreForRound={this.setScoreForRound} />
           </div>
           <div className="col-md-6">
           <Description 
@@ -89,7 +112,7 @@ nextRound =() =>{
           </div>
         </div>
         <ButtonLvl
-        nextRound ={this.nextRound}
+        nextRound ={() =>this.nextRound()}
         />
     </div>
   )
