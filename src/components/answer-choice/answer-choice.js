@@ -17,8 +17,11 @@ class AnswerChoice extends React.Component {
     }
 
     onClickChoose =(index) =>{
-        this.props.changeWait(index);
-        this.setScoreForRound(index)
+        if(!this.props.clicked[index]){
+            this.props.changeWait(index);
+            this.setScoreForRound(index)
+        }
+        this.props.changeWait(index)
     }  
 
 
@@ -29,7 +32,7 @@ class AnswerChoice extends React.Component {
         
         console.log(`id:${idOnClick}`)
         if ( idOnClick === rand) {
-          return  this.props.setScoreForRound(numberOfTry)
+          return  this.props.setScoreForRound(numberOfTry), this.setState({numberOfTry:0})
         }
         this.setState({
             numberOfTry: this.state.numberOfTry + 1
@@ -41,6 +44,7 @@ class AnswerChoice extends React.Component {
        
         const {round} = this.props;
         const birds = this.updateBirds(round)
+         
     return (
         <div className='bird-details'>
             <ul className="item-list list-group d-flex">

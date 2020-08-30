@@ -18,7 +18,7 @@ serviceWorker = new ServiceWorker();
 state ={
   idOnClick: '',
   waiting: true,
-  rand: '',
+  rand: 0,
   audio:'',
   round: 0,
   start:false,
@@ -26,20 +26,35 @@ state ={
   correct:[false,false,false,false,false,false],
   startScore:5,
   score:0,
-
+  correctAnswer:false
 }
 
 componentDidMount =() =>{
-   this.setQuestion(() =>console.log(`rand:${this.state.rand}`))
+   this.setQuestion()
    this.changeStart()
    
+}
+
+changeButtonList = (index) =>{
+  const newArr = [
+    ...this.state.clicked.slice(0,index),
+    true,
+    ...this.state.clicked.slice(index+1)
+  ]
+  this.setState({
+    clicked: newArr
+  })
+  console.log(newArr)
 }
 
 
 setScoreForRound = (numberOfTry) =>{
   this.setState({
-    score: this.state.score + this.state.startScore - numberOfTry
+    score: this.state.score + this.state.startScore - numberOfTry,
+    correctAnswer:true
+
   })
+
 }
 
 
@@ -55,6 +70,7 @@ setQuestion =() => {
   const newRound = this.state.start ? round + 1 : round
   const {audio,rand} = this.serviceWorker
     .getRandomQuestion(newRound)
+    console.log(`rand:${rand}`)
     this.setState((state) =>{
       return{
         audio,
@@ -71,6 +87,8 @@ changeWait = (index) =>{
     waiting:false,
     idOnClick: index
   })
+  this.changeButtonList(index);
+  
   
 }
 
@@ -79,7 +97,10 @@ nextRound =() =>{
     return {
       round: state.round + 1,
       idOnClick: '',
-      waiting:true
+      waiting:true,
+      correctAnswer:false,
+      clicked:[false,false,false,false,false,false]
+
   }})
 
   this.setQuestion();
@@ -87,21 +108,25 @@ nextRound =() =>{
 
 
  render() {
-   const {audio, rand,idOnClick,waiting,round,score} = this.state
+   const {audio, rand,idOnClick,waiting,round,score,correctAnswer,clicked} = this.state
   return (
     <div>
         <Header
         score={score}
         round={round}/>
-        <Question audio = {audio}/>
-
+        <Question 
+        correctAnswer={correctAnswer}
+        rand={rand}
+        audio = {audio}
+        round={round}/>
         <div className='row mb2'>
           <div className="col-md-6">
             <AnswerChoice 
             round={round}
             changeWait ={(index) =>this.changeWait(index)}
             rand={rand}
-            setScoreForRound={this.setScoreForRound} />
+            setScoreForRound={this.setScoreForRound}
+            clicked={clicked} />
           </div>
           <div className="col-md-6">
           <Description 
