@@ -1,0 +1,41 @@
+.win-menu{
+    color:white;
+    background-color: #303030;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width: 100%;
+}
+.congrats{
+    display: flex;
+    align-items: center;
+    padding-top:20px;
+    padding-bottom: 20px;
+    align-content: center;
+    
+}
+
+.btn-next {
+    background-color:#00bc8c;
+    width: 100%;
+    padding: 15px;
+    margin: 25px 0;
+}
+h5{
+    padding-left: 30px;
+    padding-right: 30px;
+    justify-items: center;
+    justify-content: center;
+    
+}
+.abs-win{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.zxc{
+    font-size: 20px;
+}

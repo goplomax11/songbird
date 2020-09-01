@@ -15,7 +15,7 @@ class Header extends React.Component{
     const {round,score} = this.props;
 
     const onType = typesBirds.map((bird,index) =>{
-        const clazz = (round === index) ? 'active' : null
+        const clazz = (round === index) ? 'eachbird active' : 'eachbird'
         return (
             <li className={clazz}>
                <h6>{bird}</h6> 

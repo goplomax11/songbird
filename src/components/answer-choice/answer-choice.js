@@ -5,13 +5,12 @@ import ServiceWorker from '../../any/service-worker';
 
 class AnswerChoice extends React.Component {
 
-    state = {
-        startScore:5,
-        numberOfTry:0
-    }
-
+    
     serviceWorker = new ServiceWorker();
-   
+    state ={
+        correct:[false,false,false,false,false,false],
+        index: ''
+    }
     updateBirds (round) {
       return this.serviceWorker.getNames(round)                    
     }
@@ -20,6 +19,9 @@ class AnswerChoice extends React.Component {
         if(!this.props.clicked[index]){
             this.props.changeWait(index);
             this.setScoreForRound(index)
+            this.setState({
+                index
+            })
         }
         this.props.changeWait(index)
     }  
@@ -27,37 +29,51 @@ class AnswerChoice extends React.Component {
 
     setScoreForRound = (idOnClick) =>{
 
-        const {rand} = this.props
-        const {numberOfTry} = this.state
+        const {rand,increaseTry} = this.props
         
-        console.log(`id:${idOnClick}`)
-        if ( idOnClick === rand) {
-          return  this.props.setScoreForRound(numberOfTry), this.setState({numberOfTry:0})
+        
+          if ( idOnClick === rand) {
+            
+          return  this.props.setScoreForRound()
         }
-        this.setState({
-            numberOfTry: this.state.numberOfTry + 1
-        })
         
+        increaseTry();
       }
 
     render() { 
        
-        const {round} = this.props;
+        const {round,rand} = this.props;
+        
         const birds = this.updateBirds(round)
-         
+        
+
+
+        const variants = birds.map((bird,index) =>{
+
+            const {clicked} = this.props;
+            
+
+            const coloring = index === rand; 
+
+            const isNeedClick = clicked[index]
+    
+            const clazz = isNeedClick? (coloring?' li-btn right':'li-btn wrong' ) :'li-btn'
+        
+    
+
+            return (
+            <li className='list-group-item' key={index} onClick={() =>this.onClickChoose(index)}>
+                  
+                <span className={clazz}>                                         
+                </span>
+                {bird}
+           </li>
+            )
+            })
     return (
         <div className='bird-details'>
             <ul className="item-list list-group d-flex">
-            {birds.map((bird,index) =>(
-                 <li className='list-group-item' key={index} onClick={() =>this.onClickChoose(index)}>
-                       
-                     <span className='li-btn'>                                         
-                     </span>
-                     {bird}
-                </li>
-            ))}
-                
-                
+                {variants}
             </ul>
         </div>
     )

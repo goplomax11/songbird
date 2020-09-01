@@ -5,11 +5,13 @@ import './buttonlvl.css'
 
      render(){
 
-    const {nextRound} = this.props
+    const {nextRound,closed} = this.props
+
+    const clazz = closed? 'btn': 'btn act'
     return (
-        
-            <button className='btn' onClick ={nextRound}>Next Level</button>
-      
+        <div >
+            <button className={clazz} onClick ={nextRound}>Next Level</button>
+        </div>
     )
     }
  }
