@@ -16,7 +16,7 @@ export default class WinMenu extends React.Component {
             <div  className='abs-win'>
                 
                     <h3>Это просто невероятно!!!</h3>
-                    <a>(Даже у меня это никогда не получалось)</a>
+                    <div>(Даже у меня это никогда не получалось)</div>
                 
             </div>
        </div>
@@ -32,9 +32,9 @@ export default class WinMenu extends React.Component {
        <div className='congrats'>
            <h5>Вы прошли викторину и набрали {score} из 30 возможных баллов</h5>
        </div>
-       <div className='btn btn-next'  onClick={this.props.reloadGame}>
+       <div className='btn btn-next'  onClick={this.props.reloadGame} >
            
-               <h3>Попробовать ещё раз!</h3>
+               <h3 >Попробовать ещё раз!</h3>
            
        </div>
    </div>

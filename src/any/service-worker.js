@@ -12,8 +12,6 @@ export default class ServiceWorker extends React.Component {
 
     getRandomQuestion = (round = 0) =>{
       const rand =  Math.floor(Math.random()*6);
-      console.log(rand)
-      console.log(birdsData)
       const {audio} = birdsData[round][rand];
       return {
           audio,
