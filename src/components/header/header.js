@@ -25,7 +25,7 @@ class Header extends React.Component{
         return(
             <div className='header flex-column'>
                 <div className='top-panel d-flex'>
-                        <img src='https://cdn6.f-cdn.com/contestentries/366530/8685907/56e6889ed1845_thumb900.jpg' className='icon'/>
+                        <img src='https://cdn6.f-cdn.com/contestentries/366530/8685907/56e6889ed1845_thumb900.jpg' className='icon' alt='default'/>
                         <h5>
                             Score: 
                             <span className="score">

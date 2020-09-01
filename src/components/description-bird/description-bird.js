@@ -31,7 +31,7 @@ class DescriptionBird extends React.Component {
         return (
             <div className = "card bird-description">
                 <div className='d-flex'>
-                    <img className ='bird-image' src={image} />
+                    <img className ='bird-image' src={image} alt='bird'/>
                     <div className='wrapper'>
                     <ul>
                         <li><h4>{name}</h4></li>

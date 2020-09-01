@@ -75,9 +75,7 @@ componentDidMount =() =>{
 increaseTry =() =>{
     this.setState({
     numberOfTry: this.state.numberOfTry + 1
-})
-console.log(this.state.numberOfTry)
-}
+})}
 
 changeButtonList = (index) =>{
   const newArr = [
@@ -87,9 +85,7 @@ changeButtonList = (index) =>{
   ]
   this.setState({
     clicked: newArr
-  })
-  console.log(newArr)
-}
+  })}
 
 
 setScoreForRound = (numberOfTry) =>{
@@ -115,7 +111,7 @@ setQuestion =() => {
   const newRound = this.state.start ? round + 1 : round
   const {audio,rand} = this.serviceWorker
     .getRandomQuestion(newRound)
-    console.log(`rand:${rand}`)
+    console.log(`Правильный ответ:${rand+1}`)
     this.setState((state) =>{
       return{
         audio,
@@ -151,7 +147,6 @@ nextRound =() =>{
       numberOfTry:0,
       closed:true
   }})
-  console.log(this.state.numberOfTry)
   if(this.state.round >= 5){
     this.setState((state) =>{
       return {
